@@ -1,1 +1,1 @@
-$:.unshift File.expand_path(%w{.. .. lib}, __FILE__)
+$:.unshift File.expand_path(File.join(%w{.. .. lib}, __FILE__))
