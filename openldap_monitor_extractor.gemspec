@@ -1,12 +1,13 @@
 # encoding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path(File.join(%w{.. lib}, __FILE__))
 $:.unshift(lib) unless $:.include?(lib)
 
 require 'openldap_monitor_extractor/version'
 
+
 Gem::Specification.new do |spec|
 
-  spec.name          = "openldap_monitor_stats"
+  spec.name          = "openldap_monitor_extractor"
   spec.version       = OpenldapMonitorExtractor::VERSION
   spec.authors       = ["Javier Juarez"]
   spec.email         = ["javier.juarez@gmail.com"]
