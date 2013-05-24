@@ -29,13 +29,5 @@ module OpenldapMonitorExtractor
       # TODO: Out with formater
       entry[0][@mapper::DNS[key][:attribute]] if entry
     end
-    # 
-    # def get_all(formater)
-    #   
-    #   values = []
-    #   @mapper::DNS_KEYS.each { |key| values << get(key) }
-    # 
-    #   values
-    # end
   end
 end
