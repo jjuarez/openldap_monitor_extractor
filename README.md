@@ -1,4 +1,4 @@
-# Open LDAP Monitor Stats
+# Open LDAP Monitor Extractor
 
 This is a simple utility to dig in the Open LDAP Monitor meta-data  
 
@@ -6,7 +6,7 @@ This is a simple utility to dig in the Open LDAP Monitor meta-data
 
 Add this line to your application's Gemfile:
 
-    gem 'openldap_monitor_stats'
+    gem 'openldap_monitor_extractor'
 
 And then execute:
 
@@ -14,11 +14,11 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install openldap_monitor_stats
+    $ gem install openldap_monitor_extractor
 
 ## Usage
 
-openldap_monitor_stats -c ldapconfigfile.yml -f statsfile.txt
+You can take a look to the examples directory
 
 ## Contributing
 
