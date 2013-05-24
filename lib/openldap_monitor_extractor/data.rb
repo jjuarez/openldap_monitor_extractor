@@ -1,5 +1,6 @@
-require 'openldap_monitor_extract/connection'
-require 'openldap_monitor_extract/formatters'
+require 'openldap_monitor_extractor/connection'
+require 'openldap_monitor_extractor/formatters'
+require 'openldap_monitor_extractor/mapper'
 
 
 module OpenldapMonitorExtractor
@@ -9,7 +10,7 @@ module OpenldapMonitorExtractor
   
   class Data
 
-    def initialize(connection, mapper=Mapper)
+    def initialize(connection, mapper=OpenldapMonitorExtractor::Mapper)
     
       @connection = connection
       @mapper     = mapper
@@ -17,9 +18,9 @@ module OpenldapMonitorExtractor
       self
     end
     
-    def get(key, formater=Formatters::Raw)
+    def get(key, formater=OpenldapMonitorExtractor::Formatters::Raw)
       
-      raise InvalidKey.new("Invalid key: #{key}") unless DN.keys.include?(key)
+      raise InvalidKey.new("Invalid key: #{key}") unless @mapper::DNS.keys.include?(key)
       
       entry = @connection.search( 
         :base          =>@mapper::DNS[key][:dn], 

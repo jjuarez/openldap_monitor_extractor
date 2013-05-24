@@ -1,6 +1,6 @@
 # encoding: utf-8
-lib = File.expand_path(File.join(%w{.. lib}, __FILE__))
-$:.unshift(lib) unless $:.include?(lib)
+$:.unshift File.join(File.dirname(__FILE__), 'lib')
+
 
 require 'openldap_monitor_extractor/version'
 

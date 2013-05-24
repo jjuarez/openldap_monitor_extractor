@@ -11,31 +11,31 @@ module OpenldapMonitorExtractor
 
     attr_reader :connection
 
-    private
     def self.builder(parameters={ })
 
-      parameters  = { :url => "ldap://localhost", username =>"foo", :password =>"secret", :base =>"cn=Monitor" }.merge(parameters)
+      parameters  = { :url => "ldap://localhost", :username =>"foo", :password =>"secret", :base =>"cn=Monitor" }.merge(parameters)
       uri         = URI.parse(parameters[:url])
+      auth        = { 
+        :method   =>:simple, 
+        :username =>parameters[:username], 
+        :password =>parameters[:password] 
+      }
+      
       cparameters = {
 	      :host =>uri.host,
 	      :port =>uri.port,
 	      :base =>parameters[:base],
-	      :auth =>{ 
-          :method   =>:simple, 
-          :username =>parameters[:username], 
-          :password =>parameters[:password] 
-        }
+	      :auth =>auth
       }
       
-      cparamenters[:encryption] = { :method =>:simple_tls } if uri.shecheme == "ldaps"
+      cparameters[:encryption] = { :method =>:simple_tls } if uri.scheme == "ldaps"
       
-      Net::LDAP.new(cparemters)
+      Net::LDAP.new(cparameters)
     end
     
-    public
     def initialize(parameters={ })
 
-      @connection = self.builder(parameters)
+      @connection = Connection::builder(parameters)
       
       raise AuthenticationError.new("Can not bind with username: #{username}") unless @connection.bind
 
