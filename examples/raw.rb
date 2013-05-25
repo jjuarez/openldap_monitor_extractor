@@ -11,4 +11,4 @@ config_file = File.join(File.dirname(__FILE__), %w{.. config ldap_sample_setting
 config      = YAML.load_file(config_file)
 
 OpenldapMonitorExtractor.configure(config)
-puts OpenldapMonitorExtractor.get(:total_connections).inspect
+puts OpenldapMonitorExtractor.get(:total_connections)

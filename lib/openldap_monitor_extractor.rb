@@ -1,4 +1,3 @@
-require "rubygems"
 require "ostruct"
 require "openldap_monitor_extractor/version"
 require "openldap_monitor_extractor/connection"
@@ -7,6 +6,7 @@ require "openldap_monitor_extractor/connection"
 module OpenldapMonitorExtractor
   extend self
 
+  
   MAPPER = {
     :total_connections    =>{ :dn =>"cn=Total,cn=Connections,cn=Monitor",   :attribute =>:monitorcounter      },
     :referals_statistics  =>{ :dn =>"cn=Referrals,cn=Statistics,cn=Monitor",:attribute =>:monitorcounter      },
@@ -28,28 +28,27 @@ module OpenldapMonitorExtractor
     :read_waiters         =>{ :dn =>"cn=Read,cn=Waiters,cn=Monitor",        :attribute =>:monitorcounter      }
   }
   
-  @connection = nil
-
-  def configure(config)
-    
+  KEYS = MAPPER.keys
+  
+  def configure(config) 
     @connection ||= Connection.new(config).connection
-    @connection
   end
   
   def get(key)
 
-    $stderr.puts key
+    dn        = MAPPER[key][:dn]
+    attribute = MAPPER[key][:attribute]
     
     raise ArgumentError.new("You need to configure a valid LDAP connection before call this") unless @connection
-    raise ArgumentError.new("Invalid key: #{key}") unless MAPPER.keys.include?(key)
+    raise ArgumentError.new("Invalid key: #{key}") unless KEYS.include?(key)
     
     entry = @connection.search( 
-      :filter        =>Net::LDAP::Filter.eq("objectClass", "*"),
-      :base          =>MAPPER[key][:dn], 
-      :attributes    =>MAPPER[key][:attribute],
-      :results       =>true)
-      
-    data = OpenSruct.new()
-    data.send(mapper::DNS[key], entry[mapper::DNS[key][:attribute]])
+      :filter     =>Net::LDAP::Filter.eq("objectClass", "*"),
+      :base       =>dn, 
+      :attributes =>[attribute])
+   
+    raise StandardError.new("Problems getting information: #{dn} from Monitor backend") unless entry
+    
+    entry[0][attribute][0]
   end
 end

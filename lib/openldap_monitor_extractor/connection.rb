@@ -5,15 +5,12 @@ require 'uri'
 
 module OpenldapMonitorExtractor
     
-  class AuthenticationError < StandardError; end
-  
   class Connection
 
     attr_reader :connection
 
     def self.builder(parameters={ })
 
-      parameters  = { :url => "ldap://localhost", :username =>"foo", :password =>"secret", :base =>"cn=Monitor" }.merge(parameters)
       uri         = URI.parse(parameters[:url])
       auth        = { 
         :method   =>:simple, 
@@ -37,8 +34,6 @@ module OpenldapMonitorExtractor
 
       @connection = Connection::builder(parameters)
       
-      raise AuthenticationError.new("Can not bind with username: #{username}") unless @connection.bind
-
       self 
     end
   end
