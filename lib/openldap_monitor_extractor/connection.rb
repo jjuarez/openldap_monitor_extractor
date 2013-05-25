@@ -40,6 +40,6 @@ module OpenldapMonitorExtractor
       raise AuthenticationError.new("Can not bind with username: #{username}") unless @connection.bind
 
       self 
-    end    
+    end
   end
 end

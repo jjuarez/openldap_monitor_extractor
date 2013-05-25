@@ -7,6 +7,8 @@ require 'yaml'
 require 'openldap_monitor_extractor'
 
 
-config     = YAML.load_file(File.join(File.dirname(__FILE__), %w{.. config ldap_sample_settings.yml}))
+config_file = File.join(File.dirname(__FILE__), %w{.. config ldap_sample_settings.yml})
+config      = YAML.load_file(config_file)
 
-puts OpenldapMonitorExtractor::Data.new(OpenldapMonitorExtractor::Connection.new(config).connection).get(:total_connections)
+OpenldapMonitorExtractor.configure(config)
+puts OpenldapMonitorExtractor.get(:total_connections).inspect
