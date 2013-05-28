@@ -8,7 +8,11 @@ require 'yaml'
 require 'openldap_monitor_extractor'
 
 
-config = YAML.load_file(ARGV[0])
-
-OpenldapMonitorExtractor.configure(config)
-puts OpenldapMonitorExtractor.get(:total_connections)
+if ARGV[0] && File.exist?(ARGV[0])
+  
+  config = YAML.load_file(ARGV[0])
+  puts OpenldapMonitorExtractor.configure(config).get(:total_connections)
+else
+  
+  puts "usage: #{$0} config_file.yml"
+end
