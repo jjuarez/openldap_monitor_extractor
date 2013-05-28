@@ -7,6 +7,8 @@ module OpenldapMonitorExtractor
     
   class Connection
 
+    DEFAULT_MONITOR_BASE = "cn=Monitor"
+    
     attr_reader :connection
 
     def self.builder(parameters={ })
@@ -21,7 +23,7 @@ module OpenldapMonitorExtractor
       cparameters = {
 	      :host =>uri.host,
 	      :port =>uri.port,
-	      :base =>parameters[:base],
+	      :base =>DEFAULT_MONITOR_BASE,
 	      :auth =>auth
       }
       

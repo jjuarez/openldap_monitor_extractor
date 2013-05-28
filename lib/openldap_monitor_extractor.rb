@@ -1,5 +1,3 @@
-<<<<<<< Local Changes
-require "ostruct"
 require "openldap_monitor_extractor/version"
 require "openldap_monitor_extractor/connection"
 
@@ -7,7 +5,6 @@ require "openldap_monitor_extractor/connection"
 module OpenldapMonitorExtractor
   extend self
 
-  
   MAPPER = {
     :total_connections    =>{ :dn =>"cn=Total,cn=Connections,cn=Monitor",   :attribute =>:monitorcounter      },
     :referals_statistics  =>{ :dn =>"cn=Referrals,cn=Statistics,cn=Monitor",:attribute =>:monitorcounter      },
@@ -32,12 +29,15 @@ module OpenldapMonitorExtractor
   KEYS = MAPPER.keys
   
   def configure(config) 
+    
     @connection ||= Connection.new(config).connection
+    
+    self
   end
   
   def get(key)
 
-    raise StandardError "The key: #{key} do not exist" unless MAPPER[key]
+    raise StandardError.new("The key: #{key} do not exist") unless KEYS.include?(key)
     
     dn        = MAPPER[key][:dn]
     attribute = MAPPER[key][:attribute]
@@ -50,9 +50,8 @@ module OpenldapMonitorExtractor
       :base       =>dn, 
       :attributes =>[attribute])
    
-    raise StandardError "Problems getting information: #{dn} from Monitor backend" unless entry
+    raise StandardError.new("Problems getting information: #{dn} from Monitor backend") unless entry
     
     entry[0][attribute][0]
   end
-end=======
->>>>>>> External Changes
+end
