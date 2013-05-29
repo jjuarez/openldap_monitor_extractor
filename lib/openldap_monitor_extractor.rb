@@ -11,6 +11,7 @@ module OpenldapMonitorExtractor
 
   MAPPER = {
     :total_connections    =>{ :dn =>"cn=Total,cn=Connections,cn=Monitor",   :attribute =>:monitorcounter     },
+    :pdu_statistics       =>{ :dn =>"cn=PDU,cn=Statistics,cn=Monitor",      :attribute =>:monitorcounter     },
     :referals_statistics  =>{ :dn =>"cn=Referrals,cn=Statistics,cn=Monitor",:attribute =>:monitorcounter     },
     :bytes_statistics     =>{ :dn =>"cn=Bytes,cn=Statistics,cn=Monitor",    :attribute =>:monitorcounter     },
     :entries_statistics   =>{ :dn =>"cn=Entries,cn=Statistics,cn=Monitor",  :attribute =>:monitorcounter     },
