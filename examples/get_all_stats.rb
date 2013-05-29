@@ -8,11 +8,12 @@ require 'yaml'
 require 'openldap_monitor_extractor'
 
 
-if ARGV[0] && File.exist?(ARGV[0])
-  
-  config = YAML.load_file(ARGV[0])
-  puts OpenldapMonitorExtractor.configure(config).get(:all).inspect
-else
-  
+unless ARGV[0] && File.exist?(ARGV[0])
+
   puts "usage: #{$0} config_file.yml"
+  Kernel.exit 1
 end
+
+  
+config = YAML.load_file(ARGV[0])
+puts OpenldapMonitorExtractor.configure(config).get(:all).inspect
