@@ -16,4 +16,4 @@ end
 
   
 config = YAML.load_file(ARGV[0])
-puts OpenldapMonitorExtractor.configure(config).get(:all).inspect
+puts OpenldapMonitorExtractor::Core.new(config).get(:all).inspect
