@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["javier.juarez@gmail.com"]
   spec.description   = %q{OpenLDAP stats gem extractor}
   spec.summary       = %q{OpenLDAP Monitor database handler utility}
-  spec.homepage      = ""
+  spec.homepage      = "http://github.com/jjuarez/openldap_monitor_extractor"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
