@@ -13,6 +13,7 @@ module OpenldapMonitorExtractor
 
     def self.builder(parameters={ })
 
+      parameters  = { :base =>DEFAULT_MONITOR_BASE }.merge(parameters)
       uri         = URI.parse(parameters[:url])
       auth        = { 
         :method   =>:simple, 
@@ -23,7 +24,7 @@ module OpenldapMonitorExtractor
       cparameters = {
 	      :host =>uri.host,
 	      :port =>uri.port,
-	      :base =>DEFAULT_MONITOR_BASE,
+	      :base =>parameters[:base],
 	      :auth =>auth
       }
       

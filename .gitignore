@@ -8,7 +8,11 @@ Gemfile.lock
 InstalledFiles
 _yardoc
 coverage
-examples/production.yml
+examples/master.yml
+examples/slave1.yml
+examples/slave2.yml
+examples/slave3.yml
+examples/slave4.yml
 doc/
 pkg
 rdoc
