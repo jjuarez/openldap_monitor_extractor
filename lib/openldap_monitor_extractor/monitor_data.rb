@@ -29,7 +29,7 @@ module OpenldapMonitorExtractor
     
     def add(key, entry)
       
-      raise ArgumentError.new("Invalid key: #{key}") unless @mapper::KEYS.include?(key)
+      raise ArgumentError.new("Invalid key: #{key}") unless @mapper.validate_key(key)
       
       type    = @mapper.type(key)
       value   = entry[0][@mapper.attribute(key)][0]
