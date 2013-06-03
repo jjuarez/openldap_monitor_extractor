@@ -2,11 +2,10 @@ module OpenldapMonitorExtractor
 
   class Mapper
     
-    private
     MAPPER = {
     
-      :start_time           =>{ :dn =>"cn=Start,cn=Time,cn=Monitor",          :attribute =>:monitorTimestamp,   :type =>:timestamp },
-      :current_time         =>{ :dn =>"cn=Current,cn=Time,cn=Monitor",        :attribute =>:monitorTimestamp,   :type =>:timestamp },
+      :start_time           =>{ :dn =>"cn=Start,cn=Time,cn=Monitor",          :attribute =>:monitortimestamp,   :type =>:timestamp },
+      :current_time         =>{ :dn =>"cn=Current,cn=Time,cn=Monitor",        :attribute =>:monitortimestamp,   :type =>:timestamp },
     
       :total_connections    =>{ :dn =>"cn=Total,cn=Connections,cn=Monitor",   :attribute =>:monitorcounter,     :type =>:counter },
 
@@ -33,8 +32,8 @@ module OpenldapMonitorExtractor
     }
   
     KEYS = MAPPER.keys
+
   
-    public
     def self.validate_key(key)  
       key == :all || KEYS.include?(key)
     end

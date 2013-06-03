@@ -1,1 +1,2 @@
-$:.unshift File.expand_path(File.join(%w{.. .. lib}, __FILE__))
+$:.unshift File.join(File.dirname(__FILE__), %w{.. lib})
+$:.unshift File.join(File.dirname(__FILE__), %w{.. lib openldap_monitor_extractor})
